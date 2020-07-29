@@ -103,13 +103,13 @@ instruction has important side-effects and must not be removed.
 Also asm volatile may trigger a memory barrier (spilling all registers
 to memory). */
 #ifdef __SUNPRO_CC
-#define UT_RELAX_CPU() asm("pause")
+#define UT_RELAX_CPU() asm("" ::: "memory")
 #else
-#define UT_RELAX_CPU() __asm__ __volatile__("pause")
+#define UT_RELAX_CPU() __asm__ __volatile__("" ::: "memory")
 #endif /* __SUNPRO_CC */
 
 #elif defined(HAVE_FAKE_PAUSE_INSTRUCTION)
-#define UT_RELAX_CPU() __asm__ __volatile__("rep; nop")
+#define UT_RELAX_CPU() __asm__ __volatile__("" ::: "memory")
 #elif defined _WIN32
 /* In the Win32 API, the x86 PAUSE instruction is executed by calling
 the YieldProcessor macro defined in WinNT.h. It is a CPU architecture-
