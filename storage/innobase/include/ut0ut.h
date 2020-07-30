@@ -116,7 +116,7 @@ the YieldProcessor macro defined in WinNT.h. It is a CPU architecture-
 independent way by using YieldProcessor. */
 #define UT_RELAX_CPU() YieldProcessor()
 #elif defined(__aarch64__)
-#define UT_RELAX_CPU() __asm__ __volatile__("isb\nisb\nisb" ::: "memory")
+#define UT_RELAX_CPU() __asm__ __volatile__("isb\nisb" ::: "memory")
 #else
 #define UT_RELAX_CPU() __asm__ __volatile__("" ::: "memory")
 #endif
